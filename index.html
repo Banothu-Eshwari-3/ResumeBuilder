@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container" id="resume-form">
+        <h1 class="text-center my-4 display-1">Resume Builder</h1>
+        <p class="text-center lead">free online resume maker, Build your brand-new resume in as little as 5 minutes</p>
+        <!---ROW FIRST ---->
+        <div class="row">
+            <!---LEFT INPUT COLUNM(personal details)--->
+
+            <div class="col-md-5">
+                <h3 class="text-center">Personal Details</h3>
+                <!--NAME-->
+                <div class="form-group mt-3">
+                    <label for="full-name">Name</label>
+                    <input type="text" id="full-name" class="form-control" required="true">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="dob">Dob</label>
+                    <input type="date" id="dob" class="form-control" required="true">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="Phone">Phone Number</label>
+                    <input type="text" id="phone" class="form-control" required="true">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="email">E-Mail</label>
+                    <input type="email" id="email" placeholder="example@domain.com" required="true" class="form-control">
+                    <div id="email-help" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="addresss">Address</label>
+                    <!--<input type="email" id="email" placeholder="example@domain.com" required="true" class="form-control">-->
+                    <textarea class="form-control" id="address" rows="3" col="30" placeholder="Present Address" required="true"></textarea>
+               
+                </div>
+                <div class="form-group mt-2">
+                    <lable for="profile-img">Profile Picture</lable>
+                    <input type="file" id="profile-img" accept="image/*" class="form-control" placeholder="Upload your profile picture" onchange="previewImage(event)">
+                    <img src="#" alt="Uploaded Picture" style="display: none;" id="image-preview" class="img-thumbnail">
+                </div>
+
+                <!-- Personal links-->
+                <h4 class="my-3">links</h4>
+                <div class="form-group">
+                    <lable for="linkedin">Linkedin <i class="fa-brands fa-linkedin"></i></lable>
+                    <input type="text" id="linkedin" class="form-control" placeholder="Enter LinkeDIN URL">
+                   
+                </div>
+                <div class="form-group">
+                    <lable for="github">Github <i class="fa-brands fa-github"></i></i></lable>
+                    <input type="text" id="github" class="form-control" placeholder="Enter your Github URL">
+                   
+                </div>
+            </div>
+            
+            <!---RIGHT INPUT COLUMN(PROFESSIONAL DETAILS)-->
+            
+            <div class="col-md-7" id="professional-details-form">
+
+                <h3 class="text-center">Professional Details</h3>
+                <!--OBJECTIVE--->
+                <div class="form-group mt-2">
+                    <lable for="objective">Objective</lable>
+                    <textarea placeholder="Write a short description about your objective." id="objective" class="form-control"></textarea>
+                </div>
+                <!--SKILS----->
+                <div id="add-skill-input-div" class="mt-2 text-start">
+                    <label for="skill-input">Skills</label>
+                    <div class="input-group" id="skill-input-section">
+                        <input type="text" class="form-control" id="skill-input" placeholder="Enter your skill">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="skill-input-button" onclick="addSkill()">Add <i class="fa-solid fa-circle-plus"></i></i></button>
+                        </div>
+                    </div>
+                    <div id="skills"></div>
+                </div>
+
+                <!---WORK EXPERIENCE---->
+                    <div id="experience-div" class="form-group mt-2">
+                        <label for="experience">Experience</label>
+                        <textarea id="experience-1" cols="30" rows="3" placeholder="Enter work/project experience 1" class="form-control we-field"></textarea>
+                        <div class="d-grid d-md-flex gap-2 mt-2 justify-content-md-end" id="we-btns-div">
+                            <button class="btn btn-primary" id="we-add-btn" onclick="addWorkExperience()">Add Experience</button>
+                            <button class="btn btn-danger" id="we-del-btn"  onclick="removeWorkExperience()">Remove</button>
+                        </div>
+                    </div>
+                
+                <!----EDUCATION---->
+                <div id="education-div" class="form-group mt-2">
+                    <label for="education">Education</label>
+                    <textarea id="education-1" cols="30" rows="3" placeholder="Enter your academic qualification" class="form-control ed-field"></textarea>
+                    <div class="d-grid d-md-flex gap-2 mt-2 justify-content-md-end" id="ed-btns-div">
+                        <button class="btn btn-primary" id="ed-add-btn" onclick="addEducation()">Add Education</button>
+                        <button class="btn btn-danger" id="ed-del-btn"  onclick="removeEducation()">Remove</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!---Buttons for input--->
+        <div class="container text-center mt-4 mb-3 Submit-btn">
+            <button onclick="startOver()" class="btn btn-outline-secondary">Reset <i class="fa-solid fa-rotate-right"></i></button>
+            <button onclick="generateResume()" class="btn btn-outline-success">Generate Resume <i class="fa-solid fa-wand-magic-sparkles"></i></button>
+            
+        </div>
+    </div>
+    <!----Resume Template-->
+    <div class="container mt-2 border rounded" id="resume-template">
+        <div class="row mx-3 my-3">
+            <div class="col-md-4 background text-center">
+                <img src="./profile-picture" alt="default picture" class="img-thumbnail text-center" id="profile-img-template">
+                <div class="container">
+                    <h3 id="full-name-template">John Doe</h3>
+                    <table class="table table-borderless">
+
+                        <tbody>
+                            <tr class="text-start">
+                                <th>DOB</th>
+                                <td id="dob-template" class="text-start">15-12-1997</td>
+                            </tr>
+                            <tr class="text-start">
+                                <th>Phone</th>
+                                <td id="phone-template" class="text-start">9959552955</td>
+                            </tr>
+                            <tr class="text-start">
+                                <th>Email</th>
+                                <td id="email-template" class="text-start">example@domain.com</td>
+                            </tr>
+                            <tr class="text-start">
+                                <th scope="row">Address</th>
+                                <td id="address-template" class="text-start">New York</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <h5>Links</h5>
+                <div class="container">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr class="text-start">
+                                <th>Linkedin</th>
+                                <td><a id="linkedin-template" href="#">www.linkedin.com</a></td>
+                            </tr>
+                            <tr class="text-start">
+                                <th>Github</th>
+                                <td><a id="github-template" href="#">www.github.com</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!---col_2 _ 8 of 12 columns professionals details-->
+            <div class="col-md-8">
+                <!----objectives-->
+                <div class="card mt-2">
+                    <div class="card-header theme">
+                        <h5>Objectives</h5>
+                    </div>
+                    <div class="card-body">
+                        <p id="objective-template">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum praesentium itaque suscipit culpa, quaerat autem dolores ut dolorum! Excepturi pariatur eum accusantium veniam deleniti error numquam nesciunt laboriosam optio tenetur.</p>
+                    </div>
+                </div>
+                <!---Skills template-->
+                <div class="card mt-4">
+                    <div class="card-header theme">
+                        <h5>Skills</h5>
+                    </div>
+                    <div class="card-body" id="skill-template-div">
+                        <span class="badge rounded-pill bg-secondary skill-pill">java</span>
+                        <span class="badge rounded-pill bg-secondary skill-pill">javaSCRIPT</span>
+                        
+                    </div>
+                </div>
+                <!----work experience-->
+                <div class="card mt-4">
+                    <div class="card-header theme">
+                        <h5>Work Experience</h5>
+                    </div>
+                    <div class="card-body">
+                       <ul id="we-template">
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint laudantium, nobis illo vitae inventore, distinctio tenetur sequi maxime ducimus natus quidem a iure perspiciatis! Maiores aliquid in vel. Libero, unde.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint laudantium, nobis illo vitae inventore, distinctio tenetur sequi maxime ducimus natus quidem a iure perspiciatis! Maiores aliquid in vel. Libero, unde.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint laudantium, nobis illo vitae inventore, distinctio tenetur sequi maxime ducimus natus quidem a iure perspiciatis! Maiores aliquid in vel. Libero, unde.</li>
+                       </ul>
+                    </div>
+        
+                </div>
+                  <!----Academic Qualification template-->
+                <div class="card mt-4">
+                  
+                    <div class="card-header theme">
+                        <h5>Academic Qualification</h5>
+                    </div>
+                    <div class="card-body">
+                       <ul id="ed-template">
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint laudantium, nobis illo vitae inventore, distinctio tenetur sequi maxime ducimus natus quidem a iure perspiciatis! Maiores aliquid in vel. Libero, unde.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint laudantium, nobis illo vitae inventore, distinctio tenetur sequi maxime ducimus natus quidem a iure perspiciatis! Maiores aliquid in vel. Libero, unde.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint laudantium, nobis illo vitae inventore, distinctio tenetur sequi maxime ducimus natus quidem a iure perspiciatis! Maiores aliquid in vel. Libero, unde.</li>
+                       </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3 mb-4 text-center" id="save-btn">
+        <button class="btn btn-outline-secondary" onclick="startOver()">Start Over <i class="fa-solid fa-hammer"></i></button>
+        <button class="btn btn-outline-success" onclick="printResume('resume-template')">PrintResume <i class="fa-solid fa-hammer"></i></button>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
+
+
+</body>
+</html>
